@@ -39,7 +39,6 @@ export class UserComponent implements OnInit {
       this.name = this.name.toUpperCase();
       this.isUpperCase = !this.isUpperCase;
     }
-    this.hobbies.push("Exercise");
   }
   
   addHobby(hobby) {
