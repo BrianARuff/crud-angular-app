@@ -17,6 +17,7 @@ export class UserComponent implements OnInit {
   hobbies: string[];
   isUpperCase: boolean;
   posts: Posts[];
+  isEdit: boolean = false;
 
   constructor(private dataService: DataService) {}
 
@@ -62,5 +63,9 @@ export class UserComponent implements OnInit {
         break;
       }
     }
+  }
+
+  toggleEdit() {
+    this.isEdit = !this.isEdit;
   }
 }
