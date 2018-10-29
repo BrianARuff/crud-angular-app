@@ -1,5 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import Address from "./user-interfaces";
+import Posts from "./user-interfaces";
+import { DataService } from "../../services/data.service";
+
 
 @Component({
   selector: "app-user",
@@ -13,12 +16,11 @@ export class UserComponent implements OnInit {
   address: Address;
   hobbies: string[];
   isUpperCase: boolean;
-  constructor() {
-    console.log(`Constructor ran`);
-  }
+  posts: Posts[];
+
+  constructor(private dataService: DataService) {}
 
   ngOnInit() {
-    console.log(`ngOnInit ran`);
     this.name = "Brian Ruff";
     this.age = 29;
     (this.email = "brff19@gmail.com"),
@@ -29,6 +31,11 @@ export class UserComponent implements OnInit {
       });
     this.hobbies = ["write code", "watch movies", "listen to music"];
     this.isUpperCase = false;
+    this.dataService.getPosts().subscribe(posts => {
+      // console.log(posts);
+      this.posts = posts;
+      console.log(this.posts);
+    });
   }
 
   onClick() {
@@ -40,17 +47,17 @@ export class UserComponent implements OnInit {
       this.isUpperCase = !this.isUpperCase;
     }
   }
-  
-  addHobby(hobby) {
+
+  addHobby(hobby: string) {
     // console.log(hobby);
     this.hobbies.unshift(hobby);
     return false;
   }
 
-  deleteHobby(hobby, i) {
+  deleteHobby(hobby: string, i: number) {
     // console.log(hobby);
-    for(let i = 0; i < this.hobbies.length; i++) {
-      if(this.hobbies[i] === hobby) {
+    for (let i = 0; i < this.hobbies.length; i++) {
+      if (this.hobbies[i] === hobby) {
         this.hobbies.splice(i, 1);
         break;
       }

@@ -4,4 +4,11 @@ interface Address {
   state: string;
 }
 
+interface Posts {
+  id: number,
+  title: string,
+  body: string,
+  userId: number
+}
+
 export default Address;
